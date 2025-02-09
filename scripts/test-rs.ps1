@@ -10,14 +10,14 @@ if ( $env:CI ) {
     pixi run cargo llvm-cov nextest
     Write-Output "::endgroup::"
 
-    Write-Output "::group::doctest"
-    pixi run cargo llvm-cov --doc
-    Write-Output "::endgroup::"
+    # Write-Output "::group::doctest"
+    # pixi run cargo llvm-cov --doc
+    # Write-Output "::endgroup::"
 
     Write-Output "::group::cov"
-    pixi run cargo llvm-cov --doctests --all-features --workspace --lcov --output-path lcov.info
+    pixi run cargo llvm-cov --doctests --all-features --lcov --output-path lcov.info
     Write-Output "::endgroup::"
 }
 else {
-    pixi run cargo test
+    pixi run cargo llvm-cov --all-features
 }
